@@ -31,6 +31,15 @@ func NewPair() (*Xrand, *Xrand) {
 	return NewWithSeed(seed), NewWithSeed(seed)
 }
 
+func NewSlice(size int) []*Xrand {
+	seed := timeSeed()
+	res := make([]*Xrand, size)
+	for i := range res {
+		res[i] = NewWithSeed(seed)
+	}
+	return res
+}
+
 // Returns a random int between min and max, included
 func (r *Xrand) Uniform(min, max int) int {
 	return min + r.Intn(max-min+1)
